@@ -30,7 +30,7 @@ namespace Interview.Repositories
 
             if (item == null)
             {
-                throw new ItemNotFoundException($"Vehicle is id({id}) doesn't exist.");
+                throw new ItemNotFoundException($"Vehicle with id({id}) doesn't exist.");
             }
 
             return item;
@@ -39,6 +39,12 @@ namespace Interview.Repositories
         public void Delete(int id)
         {
             var item = _vehicles.SingleOrDefault(v => v.Id == id);
+
+            if (item == null)
+            {
+                throw new ItemNotFoundException($"Vehicle with id({id}) doesn't exist.");
+
+            }
 
             _vehicles.Remove(item);
         }
