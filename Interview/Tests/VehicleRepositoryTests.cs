@@ -8,9 +8,10 @@ namespace Interview.Tests
 {
     public class VehicleRepositoryTests
     {
+        private const int VEHICLE_ID = 1;
         private readonly Vehicle _miniCooper = new Vehicle
         {
-            Id = 1,
+            Id = VEHICLE_ID,
             Make = "Mini",
             Model = "Cooper",
             Price = 15000m
@@ -75,6 +76,17 @@ namespace Interview.Tests
             sut.Save(_miniCooper);
 
             Should.Throw<ItemNotFoundException>(() => sut.Get(2));
+        }
+
+        [Fact]
+        public void Delete_GivenExistingId_ShouldRemoveTheItem()
+        {
+            var sut = new VehicleRepository();
+            sut.Save(_miniCooper);
+            
+            sut.Delete(VEHICLE_ID);
+
+            Should.Throw<ItemNotFoundException>(() => sut.Get(VEHICLE_ID));
         }
     }
 }
