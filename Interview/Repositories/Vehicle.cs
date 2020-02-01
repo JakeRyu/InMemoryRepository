@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Management.Instrumentation;
 using Interview.Exceptions;
 
 namespace Interview.Repositories
@@ -25,7 +26,14 @@ namespace Interview.Repositories
 
         public Vehicle Get(int id)
         {
-            return _vehicles.SingleOrDefault(v => v.Id == id);
+            var item = _vehicles.SingleOrDefault(v => v.Id == id);
+
+            if (item == null)
+            {
+                throw new ItemNotFoundException($"Vehicle is id({id}) doesn't exist.");
+            }
+
+            return item;
         }
 
         public void Delete(int id)
