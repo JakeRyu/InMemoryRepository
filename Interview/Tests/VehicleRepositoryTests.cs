@@ -74,5 +74,27 @@ namespace Interview.Tests
 
             Should.Throw<DuplicateItemException>(() => sut.Save(sameIdVehicle));
         }
+
+        [Fact]
+        public void Get_GivenExistingId_ShouldFindItem()
+        {
+            // Already covered by Save_GivenValidInput_ShouldSaveVehicleItem()
+        }
+
+        [Fact]
+        public void Get_GivenNonExistingId_ShouldThrowItemNotFoundException()
+        {
+            var miniCooper = new Vehicle
+            {
+                Id = 1,
+                Make = "Mini",
+                Model = "Cooper",
+                Price = 15000m
+            };
+            var sut = new VehicleRepository();
+            sut.Save(miniCooper);
+
+            Should.Throw<ItemNotFoundException>(() => sut.Get(2));
+        }
     }
 }

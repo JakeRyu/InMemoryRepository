@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\DuplicateItemException.cs" />
+    <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IStoreable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
