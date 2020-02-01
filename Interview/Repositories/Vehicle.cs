@@ -38,7 +38,9 @@ namespace Interview.Repositories
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var item = _vehicles.SingleOrDefault(v => v.Id == id);
+
+            _vehicles.Remove(item);
         }
 
         public void Save(Vehicle item)
