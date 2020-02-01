@@ -1,4 +1,5 @@
 using System;
+using Interview.Exceptions;
 using Interview.Repositories;
 using Shouldly;
 using Xunit;
@@ -35,6 +36,23 @@ namespace Interview.Tests
             var sut = new VehicleRepository();
             
             Should.Throw<ArgumentNullException>(() => sut.Save(nullVehicle));
+        }
+
+        [Fact]
+        public void Save_GivenExistingItem_ShouldThrowException()
+        {
+            var miniCooper = new Vehicle
+            {
+                Id = 1,
+                Make = "Mini",
+                Model = "Cooper",
+                Price = 15000m
+            };
+            var sut = new VehicleRepository();
+            
+            sut.Save(miniCooper);
+
+            Should.Throw<DuplicateItemException>(() => sut.Save(miniCooper));
         }
     }
 }
