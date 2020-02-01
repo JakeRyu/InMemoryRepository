@@ -21,7 +21,7 @@ namespace Interview.Repositories
         
         public IEnumerable<Vehicle> GetAll()
         {
-            throw new System.NotImplementedException();
+            return _vehicles;
         }
 
         public Vehicle Get(int id)
