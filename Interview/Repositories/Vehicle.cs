@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Management.Instrumentation;
 using Interview.Exceptions;
 
 namespace Interview.Repositories
@@ -43,7 +42,14 @@ namespace Interview.Repositories
                 throw new ArgumentNullException(nameof(item));
             }
 
-            if (_vehicles.Any(v => v.Id == item.Id))
+            Vehicle existing = null;
+            foreach (var vehicle in _vehicles)
+            {
+                if (vehicle.Id == item.Id)
+                    existing = vehicle;
+            }
+            
+            if (existing != null)
             {
                 throw new DuplicateItemException("Vehicle already exists.");
             }
@@ -53,7 +59,13 @@ namespace Interview.Repositories
 
         private Vehicle GetVehicleById(int id)
         {
-            var item = _vehicles.SingleOrDefault(v => v.Id == id);
+            Vehicle item = null;
+            
+            foreach (var vehicle in _vehicles)
+            {
+                if (vehicle.Id == id)
+                    item = vehicle;
+            }
 
             if (item == null)
             {

@@ -29,7 +29,10 @@ namespace Interview.Tests
 
             // Assert
             var result = sut.Get(1);
-            result.Equals(_miniCooper).ShouldBeTrue();
+            result.Id.ShouldBe(_miniCooper.Id);
+            result.Make.ShouldBe(_miniCooper.Make);
+            result.Model.ShouldBe(_miniCooper.Model);
+            result.Price.ShouldBe(_miniCooper.Price);
         }
 
         [Fact]
