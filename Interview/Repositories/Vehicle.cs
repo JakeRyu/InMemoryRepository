@@ -40,7 +40,7 @@ namespace Interview.Repositories
                 throw new ArgumentNullException(nameof(item));
             }
 
-            if (_vehicles.Any(v => v == item))
+            if (_vehicles.Any(v => v.Id == item.Id))
             {
                 throw new DuplicateItemException("Vehicle already exists.");
             }
