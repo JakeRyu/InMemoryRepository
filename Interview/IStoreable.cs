@@ -1,8 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Collections;
-
-namespace Interview
+﻿namespace Interview
 {
     public interface IStoreable<T>
     {
