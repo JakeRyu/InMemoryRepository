@@ -24,7 +24,10 @@ namespace Interview.Tests
 
             // Assert
             var result = sut.Get(1);
-            result.ShouldBe(miniCooper);
+            result.Id.ShouldBe(1);
+            result.Make.ShouldBe("Mini");
+            result.Model.ShouldBe("Cooper");
+            result.Price.ShouldBe(15000m);
         }
     }
 }

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Interview.Repositories
 {
@@ -12,6 +14,8 @@ namespace Interview.Repositories
 
     public class VehicleRepository : IRepository<Vehicle, int>
     {
+        private readonly ICollection<Vehicle> _vehicles = new Collection<Vehicle>();
+        
         public IEnumerable<Vehicle> GetAll()
         {
             throw new System.NotImplementedException();
@@ -19,7 +23,7 @@ namespace Interview.Repositories
 
         public Vehicle Get(int id)
         {
-            throw new System.NotImplementedException();
+            return _vehicles.SingleOrDefault(v => v.Id == id);
         }
 
         public void Delete(int id)
@@ -29,7 +33,7 @@ namespace Interview.Repositories
 
         public void Save(Vehicle item)
         {
-            throw new System.NotImplementedException();
+            _vehicles.Add(item);
         }
     }
 }
