@@ -88,5 +88,14 @@ namespace Interview.Tests
 
             Should.Throw<ItemNotFoundException>(() => sut.Get(VEHICLE_ID));
         }
+
+        [Fact]
+        public void Delete_GivenNonExistingId_ShouldThrowItemNotFoundException()
+        {
+            var sut = new VehicleRepository();
+            sut.Save(_miniCooper);
+            
+            Should.Throw<ItemNotFoundException>(() => sut.Delete(100));
+        }
     }
 }
