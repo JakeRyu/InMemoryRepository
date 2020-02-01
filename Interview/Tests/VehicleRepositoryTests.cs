@@ -54,5 +54,25 @@ namespace Interview.Tests
 
             Should.Throw<DuplicateItemException>(() => sut.Save(miniCooper));
         }
+
+        [Fact]
+        public void Save_GivenNewItemWithSameId_ShouldThrowDuplicateItemException()
+        {
+            var miniCooper = new Vehicle
+            {
+                Id = 1,
+                Make = "Mini",
+                Model = "Cooper",
+                Price = 15000m
+            };
+            var sut = new VehicleRepository();
+            sut.Save(miniCooper);
+            var sameIdVehicle = new Vehicle
+            {
+                Id = 1
+            };
+
+            Should.Throw<DuplicateItemException>(() => sut.Save(sameIdVehicle));
+        }
     }
 }
