@@ -8,25 +8,26 @@ namespace Interview.Tests
 {
     public class VehicleRepositoryTests
     {
+        private readonly Vehicle _miniCooper = new Vehicle
+        {
+            Id = 1,
+            Make = "Mini",
+            Model = "Cooper",
+            Price = 15000m
+        };
+        
         [Fact]
         public void Save_GivenValidInput_ShouldSaveVehicleItem()
         {
             // Arrange
-            var miniCooper = new Vehicle
-            {
-                Id = 1,
-                Make = "Mini",
-                Model = "Cooper",
-                Price = 15000m
-            };
             var sut = new VehicleRepository();
             
             // Act
-            sut.Save(miniCooper);
+            sut.Save(_miniCooper);
 
             // Assert
             var result = sut.Get(1);
-            result.Equals(miniCooper).ShouldBeTrue();
+            result.Equals(_miniCooper).ShouldBeTrue();
         }
 
         [Fact]
@@ -41,32 +42,18 @@ namespace Interview.Tests
         [Fact]
         public void Save_WhenSavingTwice_ShouldThrowDuplicateItemException()
         {
-            var miniCooper = new Vehicle
-            {
-                Id = 1,
-                Make = "Mini",
-                Model = "Cooper",
-                Price = 15000m
-            };
             var sut = new VehicleRepository();
             
-            sut.Save(miniCooper);
+            sut.Save(_miniCooper);
 
-            Should.Throw<DuplicateItemException>(() => sut.Save(miniCooper));
+            Should.Throw<DuplicateItemException>(() => sut.Save(_miniCooper));
         }
 
         [Fact]
         public void Save_GivenNewItemWithSameId_ShouldThrowDuplicateItemException()
         {
-            var miniCooper = new Vehicle
-            {
-                Id = 1,
-                Make = "Mini",
-                Model = "Cooper",
-                Price = 15000m
-            };
             var sut = new VehicleRepository();
-            sut.Save(miniCooper);
+            sut.Save(_miniCooper);
             var sameIdVehicle = new Vehicle
             {
                 Id = 1
@@ -84,15 +71,8 @@ namespace Interview.Tests
         [Fact]
         public void Get_GivenNonExistingId_ShouldThrowItemNotFoundException()
         {
-            var miniCooper = new Vehicle
-            {
-                Id = 1,
-                Make = "Mini",
-                Model = "Cooper",
-                Price = 15000m
-            };
             var sut = new VehicleRepository();
-            sut.Save(miniCooper);
+            sut.Save(_miniCooper);
 
             Should.Throw<ItemNotFoundException>(() => sut.Get(2));
         }
