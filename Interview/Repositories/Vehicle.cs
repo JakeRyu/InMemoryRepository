@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -33,6 +34,11 @@ namespace Interview.Repositories
 
         public void Save(Vehicle item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+            
             _vehicles.Add(item);
         }
     }
