@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Interview.Exceptions;
 using Interview.Repositories;
 using Shouldly;
@@ -96,6 +97,25 @@ namespace Interview.Tests
             sut.Save(_miniCooper);
             
             Should.Throw<ItemNotFoundException>(() => sut.Delete(100));
+        }
+
+        [Fact]
+        public void GetAll_ShouldReturnAllItems()
+        {
+            var sut = new VehicleRepository();
+            sut.Save(_miniCooper);
+            var jaguarXf = new Vehicle
+            {
+                Id = 2,
+                Make = "Jaguar",
+                Model = "XF",
+                Price = 38000
+            };
+            sut.Save(jaguarXf);
+
+            var result = sut.GetAll();
+            
+            result.Count().ShouldBe(2);
         }
     }
 }
