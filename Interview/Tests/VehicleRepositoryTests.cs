@@ -39,7 +39,7 @@ namespace Interview.Tests
         }
 
         [Fact]
-        public void Save_GivenExistingItem_ShouldThrowException()
+        public void Save_GivenExistingItem_ShouldThrowDuplicateItemException()
         {
             var miniCooper = new Vehicle
             {
