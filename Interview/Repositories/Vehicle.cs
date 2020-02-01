@@ -26,25 +26,12 @@ namespace Interview.Repositories
 
         public Vehicle Get(int id)
         {
-            var item = _vehicles.SingleOrDefault(v => v.Id == id);
-
-            if (item == null)
-            {
-                throw new ItemNotFoundException($"Vehicle with id({id}) doesn't exist.");
-            }
-
-            return item;
+            return GetVehicleById(id);
         }
 
         public void Delete(int id)
         {
-            var item = _vehicles.SingleOrDefault(v => v.Id == id);
-
-            if (item == null)
-            {
-                throw new ItemNotFoundException($"Vehicle with id({id}) doesn't exist.");
-
-            }
+            var item = GetVehicleById(id);
 
             _vehicles.Remove(item);
         }
@@ -62,6 +49,18 @@ namespace Interview.Repositories
             }
             
             _vehicles.Add(item);
+        }
+
+        private Vehicle GetVehicleById(int id)
+        {
+            var item = _vehicles.SingleOrDefault(v => v.Id == id);
+
+            if (item == null)
+            {
+                throw new ItemNotFoundException($"Vehicle with id({id}) doesn't exist.");
+            }
+
+            return item;
         }
     }
 }
