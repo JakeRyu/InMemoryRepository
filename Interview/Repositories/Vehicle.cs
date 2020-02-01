@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Interview.Exceptions;
 
 namespace Interview.Repositories
 {
@@ -37,6 +38,11 @@ namespace Interview.Repositories
             if (item == null)
             {
                 throw new ArgumentNullException(nameof(item));
+            }
+
+            if (_vehicles.Any(v => v == item))
+            {
+                throw new DuplicateItemException("Vehicle already exists.");
             }
             
             _vehicles.Add(item);
