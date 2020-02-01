@@ -1,3 +1,4 @@
+using System;
 using Interview.Repositories;
 using Shouldly;
 using Xunit;
@@ -25,6 +26,15 @@ namespace Interview.Tests
             // Assert
             var result = sut.Get(1);
             result.Equals(miniCooper).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void Save_GivenNullItem_ShouldThrowArgumentNullException()
+        {
+            Vehicle nullVehicle = null;
+            var sut = new VehicleRepository();
+            
+            Should.Throw<ArgumentNullException>(() => sut.Save(nullVehicle));
         }
     }
 }
